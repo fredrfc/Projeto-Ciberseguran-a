@@ -29,7 +29,7 @@ def cadastro_vulnerabilidades(dict_ativos):
             return False
 
         descricao = input('Elabore uma pequena descrição para a vulnerabilidade: ')
-        categoria = input('Qual é a categoria dessa vulnerabilidade? (Ex: software desatualizado, senha fraca, etc.): ')
+        categoria = input('Qual é a categoria dessa vulnerabilidade? (Ex: software desatualizado, senha fraca, etc.): ').strip()
         print('\nESCALA DE SEVERIDADE')
         print('1. Baixa')
         print('2. Média')
@@ -42,7 +42,7 @@ def cadastro_vulnerabilidades(dict_ativos):
         print('3. Corrigida')
         print('4 Aceita como risco\n')
         status = input('Digite o número correspondente ao status da sua vulnerabilidade (1, 2, 3 ou 4): ').strip()
-        data_cadastro = input('Digite a data de identificação da vulnerabilidade: ')
+        data_cadastro = input('Digite a data de identificação da vulnerabilidade: ').strip()
 
         if ativo == '' or descricao == '' or categoria == '' or severidade == '' or status == '' or data_cadastro == '':
             print('O(s) campos(s) não pode(m) estar vazio(s)!')
@@ -62,7 +62,7 @@ def cadastro_vulnerabilidades(dict_ativos):
         num_status = int(status)
         status_enum = list(Status)[num_status - 1]
 
-        vulnerabilidades_nova = {
+        vulnerabilidades = {
             'Descrição': descricao,
             'Categoria': categoria,
             'Severidade': severidade_enum.value,
@@ -70,7 +70,7 @@ def cadastro_vulnerabilidades(dict_ativos):
             'Data': data_cadastro
         }
 
-        dict_ativos[ativo]['Vulnerabilidades associadas'].append(vulnerabilidades_nova)
+        dict_ativos[ativo]['Vulnerabilidades associadas'].append(vulnerabilidades)
 
     except KeyboardInterrupt:
         print('Processo encerrado pelo usuário. Preparando para sair...')
